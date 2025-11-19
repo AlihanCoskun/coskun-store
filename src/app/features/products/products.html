@@ -1,25 +1,28 @@
-<h2 class="mb-6 text-2xl font-semibold text-slate-900">Products</h2>
+<div class="flex h-full flex-col">
+  <h2 class="mb-4 text-2xl font-semibold text-slate-900">Products</h2>
+  <div class="flex-1 overflow-y-auto pr-2">
+    <div class="grid gap-6 md:grid-cols-3">
+      @for ((product of products$ | async); track product){
+      <div class="flex flex-col rounded-xl border bg-white p-4 shadow-sm">
+        <h3 class="mb-2 text-lg font-semibold text-slate-900">
+          {{ product.name }}
+        </h3>
+        <p class="mb-4 flex-1 text-sm text-slate-600">
+          {{ product.description }}
+        </p>
+        <div class="mt-2 flex items-center justify-between border-t pt-3 text-sm text-slate-900">
+          <span class="font-semibold">
+            {{ product.price | currency : 'TRY' : 'symbol' : '1.2-2':'tr' }}
+          </span>
+          <button (click)="addToCart(product)"
+            class="inline-flex items-center rounded-full bg-blue-500 px-3 py-1.5 text-xs font-medium text-white shadow hover:bg-blue-600 focus-visible:outline-none 
+          focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 transition cursor-pointer">
+            Add to cart
+          </button>
+        </div>
+      </div>
+      }
 
-<div class="grid gap-6 md:grid-cols-3">
-  @for (product of products; track product){
-  <div class="flex flex-col rounded-xl border bg-white p-4 shadow-sm">
-    <h3 class="mb-2 text-lg font-semibold text-slate-900">
-      {{ product.name }}
-    </h3>
-    <p class="mb-4 flex-1 text-sm text-slate-600">
-      {{ product.description }}
-    </p>
-    <div class="mt-2 flex items-center justify-between border-t pt-3 text-sm text-slate-900">
-      <span class="font-semibold">
-        {{ product.price | currency : 'USD' : 'symbol' : '1.0-0' }}
-      </span>
-      <button (click)="addToCart(product)"
-        class="inline-flex items-center rounded-full bg-blue-500 px-3 py-1.5 text-xs font-medium text-white shadow hover:bg-blue-600 focus-visible:outline-none 
-        focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 transition">
-        Add to cart
-      </button>
     </div>
   </div>
-  }
-
 </div>

@@ -7,14 +7,16 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { cartReducer } from './store/cart/cart.reducer';
+import { productReducer } from './store/product/product.reducer';
+import { CartEffects } from './store/cart/cart.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes), provideClientHydration(withEventReplay()),
-    provideStore({cart: cartReducer}),
-    provideEffects(),
+    provideStore({cart: cartReducer, product: productReducer}),
+    provideEffects([CartEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 ]
 };

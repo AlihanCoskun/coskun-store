@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../shared/services/cart.service';
 import { Product } from '../../shared/models/product.model';
 import { CommonModule, CurrencyPipe, NgForOf } from '@angular/common';
+import { ProductService } from '../../shared/services/product.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -9,29 +11,16 @@ import { CommonModule, CurrencyPipe, NgForOf } from '@angular/common';
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })
-export class Products {
-private cartService = inject(CartService);
+export class Products implements OnInit {
+  private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Starter Digital Pack',
-      description: 'Perfect entry-level digital product bundle.',
-      price: 29,
-    },
-    {
-      id: 2,
-      name: 'Pro Seller Kit',
-      description: 'Advanced tools to scale your digital store.',
-      price: 79,
-    },
-    {
-      id: 3,
-      name: 'Ultimate Growth Suite',
-      description: 'All-in-one package to maximise your earnings.',
-      price: 149,
-    },
-  ];
+  products$!: Observable<Product[]>;
+
+  ngOnInit(): void {
+    this.productService.loadProducts();
+    this.products$ = this.productService.products$;
+  }
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);

@@ -11,7 +11,7 @@ import { CartItem } from '../../store/cart/cart.models';
   styleUrl: './cart.scss',
 })
 export class Cart {
-private cartService = inject(CartService);
+  private cartService = inject(CartService);
 
   items$: Observable<CartItem[]> = this.cartService.items$;
   totalItems$: Observable<number> = this.cartService.totalItems$;

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { CartState } from './cart.models';
-import { addItem, clearCart, removeItem, updateQuantity } from './cart.actions';
+import { addItem, clearCart, loadCartFromStorageSuccess, removeItem, updateQuantity } from './cart.actions';
 
 export const initialState: CartState = {
     items: []
@@ -46,4 +46,9 @@ export const cartReducer = createReducer(
     }),
 
     on(clearCart, (): CartState => initialState),
+
+     on(loadCartFromStorageSuccess, (state, { items }): CartState => ({
+    ...state,
+    items,
+  })),
 );
