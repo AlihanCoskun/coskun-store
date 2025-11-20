@@ -1,28 +1,42 @@
-<div class="flex h-full flex-col">
-  <h2 class="mb-4 text-2xl font-semibold text-slate-900">Products</h2>
-  <div class="flex-1 overflow-y-auto pr-2">
+<div class="flex h-full flex-col overflow-hidden">
+  <h2 class="mb-4 text-2xl font-semibold text-slate-900">
+    Products
+  </h2>
+
+  <div class="flex-1 flex flex-col justify-between overflow-y-auto pr-2">
     <div class="grid gap-6 md:grid-cols-3">
-      @for ((product of products$ | async); track product){
-      <div class="flex flex-col rounded-xl border bg-white p-4 shadow-sm">
-        <h3 class="mb-2 text-lg font-semibold text-slate-900">
-          {{ product.name }}
-        </h3>
-        <p class="mb-4 flex-1 text-sm text-slate-600">
-          {{ product.description }}
-        </p>
-        <div class="mt-2 flex items-center justify-between border-t pt-3 text-sm text-slate-900">
-          <span class="font-semibold">
-            {{ product.price | currency : 'TRY' : 'symbol' : '1.2-2':'tr' }}
-          </span>
-          <button (click)="addToCart(product)"
-            class="inline-flex items-center rounded-full bg-blue-500 px-3 py-1.5 text-xs font-medium text-white shadow hover:bg-blue-600 focus-visible:outline-none 
-          focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 transition cursor-pointer">
+      @for( product of pagedProducts; track product){
+      <mat-card class="flex h-full flex-col" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ product.price | currency : 'TRY' : 'symbol' : '1.2-2': 'tr' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <img mat-card-image [src]="product.imageUrl" [alt]="product.name"
+          class="mx-auto my-2 h-24 w-auto object-contain" />
+
+        <mat-card-content class="flex-1">
+          <p class="text-sm text-slate-700">
+            {{ product.description | truncate: 80 }}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions class="mt-2 flex justify-end">
+          <button mat-raised-button color="primary" (click)="addToCart(product)">
             Add to cart
           </button>
-        </div>
-      </div>
+        </mat-card-actions>
+      </mat-card>
       }
 
+    </div>
+
+    <div class="mt-4 flex justify-center">
+      <mat-paginator [length]="products.length" [pageSize]="pageSize" [pageSizeOptions]="[3,6]"
+        (page)="onPageChange($event)" aria-label="Product pagination">
+      </mat-paginator>
     </div>
   </div>
 </div>

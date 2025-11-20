@@ -47,8 +47,8 @@ export const cartReducer = createReducer(
 
     on(clearCart, (): CartState => initialState),
 
-     on(loadCartFromStorageSuccess, (state, { items }): CartState => ({
-    ...state,
-    items,
-  })),
+    on(loadCartFromStorageSuccess, (state, { items }): CartState => ({
+        ...state,
+        items,
+    })),
 );
