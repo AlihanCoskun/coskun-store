@@ -11,6 +11,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
+import { SnackbarService } from '../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +22,8 @@ import {
 export class Products implements OnInit {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
+  private snackbar = inject(SnackbarService);
+
   products: Product[] = [];
   pageSize = 6;
   currentPage = 0;
@@ -46,5 +49,6 @@ export class Products implements OnInit {
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
+    this.snackbar.success(`Added "${product.name}" to cart successfully.`);
   }
 }

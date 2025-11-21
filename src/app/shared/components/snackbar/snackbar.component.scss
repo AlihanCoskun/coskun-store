@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+.snackbar-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+
+  color: #0f172a;
+  font-size: 0.875rem;
+}
+
+.snackbar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.snackbar-label {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.snackbar-message {
+  font-size: 0.8rem;
+}
+
+.snackbar-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.snackbar-close:hover {
+  opacity: 1;
+}
+
+.snackbar-success {
+  background-color: #dcfce7;
+  border: 1px solid #4ade80;
+}
+
+.snackbar-info {
+  background-color: #dbeafe;
+  border: 1px solid #60a5fa;
+}
+
+.snackbar-error {
+  background-color: #fee2e2;
+  border: 1px solid #f87171;
+}

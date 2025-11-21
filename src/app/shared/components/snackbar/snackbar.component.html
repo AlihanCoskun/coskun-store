@@ -1,0 +1,14 @@
+<div class="snackbar-root" [ngClass]="containerClass">
+  <div class="snackbar-content">
+    <div class="snackbar-label">
+      {{ label }}
+    </div>
+    <div class="snackbar-message">
+      {{ data.message }}
+    </div>
+  </div>
+
+  <button class="snackbar-close" type="button" (click)="close()">
+    ✕
+  </button>
+</div>
